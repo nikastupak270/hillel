@@ -45,23 +45,22 @@ students['Олександр Добринькін'] = {
 print('Додано нового студента')
 print('Олександр Добринькін')
 print(students['Олександр Добринькін'])
-
+print()
 
 high_score_students = []
+scores = []
 for student_name, student_info in students.items():
     if student_info['Середній бал'] > 90:
         high_score_students.append([student_name, student_info['Середній бал'], student_info['Пошта']])
-print('Список відмінників')
-for student in high_score_students:
-    print(student)
-
-
-scores = [student_info['Середній бал'] for student_info in students.values()]
-print(f'Середній бал групи: {sum(scores)/len(scores)}')
-
-
-for student_name, student_info in students.items():
+    scores.append(student_info['Середній бал'])
     if not student_info['Номер телефону']:
         students[student_name]['Номер телефону'] = '+380933539659'
         print(f'Студенту {student_name} додано номер телефону')
         print(students[student_name])
+
+print('\nСписок відмінників')
+for student in high_score_students:
+    print(student)
+
+average_score = 0 if not scores else sum(scores) / len(scores)
+print(f'\nСередній бал групи: {average_score}')
