@@ -1,6 +1,6 @@
 def my_decorator(func):
-    def inner(v):
-        result = func(v)
+    def inner(*args, **kwargs):
+        result = func(*args, **kwargs)
         if isinstance(result, int):
             result += 10
         return result
