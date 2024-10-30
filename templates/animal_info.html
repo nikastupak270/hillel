@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Animal info</title>
+    <style>
+        body {
+            background-color: #EEE8AA;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<h1>Information about the most costed animal</h1>
+{% if is_poisoned %}
+<h3>{{ title }}</h3>
+{% else %}
+<h4>{{ title }}</h4>
+{% endif %}
+<p>Cost of care: {{ price }}</p>>
+<p>Quantity of animal: {{ qty }}</p>>
+<p>Origin: {{ from }}</p>>
+{% if is_poisoned %}
+<p><strong>POISONED: {{ is_poisoned }}</strong></p>
+{% else %}
+<p>Poisoned: {{ is_poisoned }}</p>
+{% endif %}
+
+</body>
+
+</html>

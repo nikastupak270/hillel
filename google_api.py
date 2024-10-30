@@ -1,6 +1,16 @@
+import jinja2
 import requests
 import smtplib
 import ssl
+
+
+def render_html(html_path: str, params: dict) -> str:
+    template_loader = jinja2.FileSystemLoader(searchpath='./')
+    template_env = jinja2.Environment(loader=template_loader)
+    template = template_env.get_template(html_path)
+    output = template.render(params)
+    return output
+
 
 url = 'https://script.google.com/macros/s/AKfycbxp6aZAg7HXs7y8Uei1T6FiVHZdEpoFTa5Rs20w8aoSObSsLXuqplOFhbf5mGArDnIU/exec'
 
@@ -19,13 +29,10 @@ for animal_item in response['data']:
 print(f'Вартість догляду за отруйними тваринами: {cost_of_care_poisoned}')
 print(f'Кількість африканських тварин в зоопарку: {qty_african}')
 
-title = f'<h3>{most_costed_animal['title']}</h3>' if most_costed_animal['is_poisoned'] else f'<h4>{most_costed_animal['title']}</h4>'
+result = render_html('templates/animal_info.html', most_costed_animal)
 msg = f'''From: nika.stupak.2013@gmail.com
          Subject: Найбільш дорога в обслуговуванні тварина
-         Title - {title}
-         Cost of care - {most_costed_animal['price']}
-         Quantity - {most_costed_animal['qty']}
-         From - {most_costed_animal['from']}
+         {result}
          '''
 password = input('Input your password: ')
 context = ssl.create_default_context()
